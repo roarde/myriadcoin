@@ -3103,6 +3103,21 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
             return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid YESCRYPT block");
     }
 
+    // MIP1 Equihash
+    bool bMIP1 = (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_EQUIHASH, versionbitscache) == THRESHOLD_ACTIVE);
+    if (bMIP1)
+    {
+        if (algo == ALGO_SKEIN)
+            return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid SKEIN block");
+        if (algo >= NUM_ALGOS_IMPL)
+            return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid algo id");
+    }
+    else
+    {
+        if (algo == ALGO_EQUIHASH)
+            return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid EQUIHASH block");
+    }
+
     // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
     // check for version 2, 3 and 4 upgrades
     if((block.nVersion < 2 && nHeight >= consensusParams.BIP34Height) ||
@@ -3225,8 +3240,8 @@ static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state
         pindexPrev = (*mi).second;
         if (pindexPrev->nStatus & BLOCK_FAILED_MASK)
             return state.DoS(100, error("%s: prev block invalid", __func__), REJECT_INVALID, "bad-prevblk");
-
         assert(pindexPrev);
+
         if (fCheckpointsEnabled && !CheckIndexAgainstCheckpoint(pindexPrev, state, chainparams, hash))
             return error("%s: CheckIndexAgainstCheckpoint(): %s", __func__, state.GetRejectReason().c_str());
 
