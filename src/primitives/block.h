@@ -108,6 +108,7 @@ public:
         block.nBits          = nBits;
         block.nNonce         = nNonce;
         block.auxpow         = auxpow;
+        block.nSolution      = nSolution;
         return block;
     }
 
