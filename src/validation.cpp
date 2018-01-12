@@ -1208,6 +1208,9 @@ static bool ReadBlockOrHeader(T& block, const CDiskBlockPos& pos, const Consensu
     // Check the header
     if (!CheckProofOfWork(block, consensusParams))
         return error("ReadBlockFromDisk: Errors in block header at %s", pos.ToString());
+    if (block.GetAlgo() == ALGO_EQUIHASH)
+        if (!CheckEquihashSolution(&block, Params()))
+            return error("ReadBlockFromDisk: Errors in equihash solution at %s", pos.ToString());
 
     return true;
 }
@@ -2916,8 +2919,14 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW)
 {
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(block, consensusParams))
-        return state.DoS(50, false, REJECT_INVALID, "high-hash", false, "proof of work failed");
+    if (fCheckPOW)
+    {
+        if (!CheckProofOfWork(block, consensusParams))
+            return state.DoS(50, false, REJECT_INVALID, "high-hash", false, "proof of work failed");            
+        if (block.GetAlgo() == ALGO_EQUIHASH)
+            if (!CheckEquihashSolution(&block, Params()))
+                return state.DoS(50, false, REJECT_INVALID, "bad-equihash", false, "bad equihash solution");
+    }
     return true;
 }
 

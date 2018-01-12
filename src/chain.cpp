@@ -396,6 +396,8 @@ std::string GetAlgoName(int Algo, uint32_t time, const Consensus::Params& consen
             return std::string("qubit");
         case ALGO_YESCRYPT:
             return std::string("yescrypt");
+        case ALGO_EQUIHASH:
+            return std::string("equihash");
     }
     return std::string("unknown");
 }

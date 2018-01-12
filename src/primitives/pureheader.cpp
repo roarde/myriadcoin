@@ -42,6 +42,8 @@ uint256 CPureBlockHeader::GetPoWHash(int algo, const Consensus::Params& consensu
             yescrypt_hash(BEGIN(nVersion), BEGIN(thash));
             return thash;
         }
+        case ALGO_EQUIHASH:
+            return GetHash();
     }
     return GetHash();
 }
@@ -69,6 +71,8 @@ int GetAlgo(int nVersion)
             return ALGO_QUBIT;
         case BLOCK_VERSION_YESCRYPT:
             return ALGO_YESCRYPT;
+        case BLOCK_VERSION_EQUIHASH:
+            return ALGO_EQUIHASH;
     }
     return ALGO_SHA256D;
 }

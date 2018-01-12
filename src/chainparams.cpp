@@ -186,6 +186,11 @@ public:
         fRequireStandard = true;
         fMineBlocksOnDemand = false;
 
+        const size_t N = 200, K = 9;
+        // BOOST_STATIC_ASSERT(equihash_parameters_acceptable(N, K));
+        nEquihashN = N;
+        nEquihashK = K;
+
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
             (      0, uint256S("0x00000ffde4c020b5938441a0ea3d314bf619eff0b38f32f78f7583cffa1ea485"))
