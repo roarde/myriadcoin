@@ -19,6 +19,7 @@ enum {
     ALGO_SKEIN    = 3,
     ALGO_QUBIT    = 4,
     ALGO_YESCRYPT = 5,
+    ALGO_EQUIHASH = 6,
     NUM_ALGOS_IMPL
 };
 
@@ -36,6 +37,7 @@ enum
     BLOCK_VERSION_SKEIN          = (3 << 9),
     BLOCK_VERSION_QUBIT          = (4 << 9),
     BLOCK_VERSION_YESCRYPT       = (5 << 9),
+    BLOCK_VERSION_EQUIHASH       = (6 << 9),
 };
 
 /** extract algo from nVersion */
@@ -66,6 +68,7 @@ public:
     uint32_t nTime;
     uint32_t nBits;
     uint32_t nNonce;
+    std::vector<unsigned char> nSolution;
 
     CPureBlockHeader()
     {
@@ -82,6 +85,8 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
+        if (GetAlgo() == ALGO_EQUIHASH)
+            READWRITE(nSolution);
     }
 
     void SetNull()
@@ -92,6 +97,7 @@ public:
         nTime = 0;
         nBits = 0;
         nNonce = 0;
+        nSolution.clear();
     }
 
     bool IsNull() const
@@ -213,6 +219,9 @@ public:
                 break;
             case ALGO_YESCRYPT:
                 nVersion |= BLOCK_VERSION_YESCRYPT;
+                break;
+            case ALGO_EQUIHASH:
+                nVersion |= BLOCK_VERSION_EQUIHASH;
                 break;
             default:
                 break;

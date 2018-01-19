@@ -12,6 +12,8 @@
 #include "uint256.h"
 #include "util.h"
 #include "bignum.h"
+#include "crypto/equihash/equihash.h"
+#include "streams.h"
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo, const Consensus::Params& params)
 {
@@ -263,6 +265,41 @@ unsigned int CalculateNextWorkRequiredV2(const CBlockIndex* pindexPrev, const CB
     }
 
     return bnNew.GetCompact();
+}
+
+bool CheckEquihashSolution(const CBlockHeader *pblock, const CChainParams& params)
+{
+    unsigned int n = params.EquihashN();
+    unsigned int k = params.EquihashK();
+
+    // Hash state
+    crypto_generichash_blake2b_state state;
+    EhInitialiseState(n, k, state);
+
+    // I = the block header minus nonce and solution.
+    CEquihashInput I{*pblock};
+    // I||V
+    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
+    ss << I;
+    ss << pblock->nNonce;
+
+    // H(I||V||...
+    crypto_generichash_blake2b_update(&state, (unsigned char*)&ss[0], ss.size());
+
+    #ifdef ENABLE_RUST
+    // Ensure that our Rust interactions are working in production builds. This is
+    // temporary and should be removed.
+    {
+        assert(librustzcash_xor(0x0f0f0f0f0f0f0f0f, 0x1111111111111111) == 0x1e1e1e1e1e1e1e1e);
+    }
+    #endif // ENABLE_RUST
+
+    bool isValid;
+    EhIsValidSolution(n, k, state, pblock->nSolution, isValid);
+    if (!isValid)
+        return error("CheckEquihashSolution(): invalid solution");
+
+    return true;
 }
 
 bool CheckProofOfWork(uint256 hash, int algo, unsigned int nBits, const Consensus::Params& params)

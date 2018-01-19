@@ -1125,6 +1125,8 @@ bool AppInitParameterInteraction()
         miningAlgo = ALGO_QUBIT;
     else if (strAlgo == "yescrypt")
         miningAlgo = ALGO_YESCRYPT;
+    else if (strAlgo == "equihash")
+        miningAlgo = ALGO_EQUIHASH;
     else
         miningAlgo = ALGO_SHA256D;
 

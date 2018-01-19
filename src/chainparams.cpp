@@ -139,6 +139,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1513296000; // December 15th, 2017
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1544832000; // December 15th, 2018
 
+        // Deployment of Equihash (MIP1)
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].bit = 3;
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].nStartTime = 1527811200; // June 1st, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].nTimeout = 1546732800; // June 1st, 2019
+
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
 
@@ -185,6 +190,11 @@ public:
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;
         fMineBlocksOnDemand = false;
+
+        const size_t N = 200, K = 9;
+        // BOOST_STATIC_ASSERT(equihash_parameters_acceptable(N, K));
+        nEquihashN = N;
+        nEquihashK = K;
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
@@ -298,6 +308,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1506816000; // October 1st, 2017
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1538352000; // October 1st, 2018
+
+        // Deployment of Equihash (MIP1)
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].bit = 3;
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].nStartTime = 1514764800; // Jan 1st, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].nTimeout = 1546300800; // Jan 1st, 2019
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
@@ -422,6 +437,9 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 999999999999ULL;
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].bit = 3;
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].nStartTime = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_EQUIHASH].nTimeout = 999999999999ULL;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");

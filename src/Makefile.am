@@ -294,7 +294,10 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/yescrypt/sysendian.h \
   crypto/yescrypt/yescrypt.h \
   crypto/yescrypt/yescrypt-best.c \
-  crypto/yescrypt/yescryptcommon.c
+  crypto/yescrypt/yescryptcommon.c \
+  crypto/equihash/equihash.h \
+  crypto/equihash/equihash.cpp \
+  crypto/equihash/equihash.tcc
 
 # consensus: shared between all executables that validate any consensus rules.
 libbitcoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
@@ -415,7 +418,7 @@ myriadcoind_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-myriadcoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+myriadcoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(SODIUM_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # myriadcoin-cli binary #
 myriadcoin_cli_SOURCES = bitcoin-cli.cpp

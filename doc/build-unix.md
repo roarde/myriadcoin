@@ -36,6 +36,7 @@ These dependencies are required:
  libssl      | Crypto           | Random Number Generation, Elliptic Curve Cryptography
  libboost    | Utility          | Library for threading, data structures, etc
  libevent    | Networking       | OS independent asynchronous networking
+ libsodium   | Crypto           | OS independent crypto library used by Equihash
 
 Optional dependencies:
 
@@ -103,6 +104,12 @@ Optional (see --with-miniupnpc and --enable-upnp-default):
 ZMQ dependencies (provides ZMQ API 4.x):
 
     sudo apt-get install libzmq3-dev
+
+Sodium dependencies
+
+    sudo add-apt-repository ppa:chris-lea/libsodium
+    sudo apt-get update
+    sudo apt-get install libsodium-dev
 
 Dependencies for the GUI: Ubuntu & Debian
 -----------------------------------------
