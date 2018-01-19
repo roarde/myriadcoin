@@ -3117,6 +3117,13 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
         if (algo == ALGO_EQUIHASH)
             return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid EQUIHASH block");
     }
+  
+    bool bMIP2 = (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_RESERVEALGO, versionbitscache) == THRESHOLD_ACTIVE);
+    if (bMIP2)
+    {
+        if (algo >= NUM_ALGOS_IMPL)
+            return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid algo id");
+    }
 
     // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
     // check for version 2, 3 and 4 upgrades

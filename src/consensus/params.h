@@ -19,6 +19,7 @@ enum DeploymentPos
     DEPLOYMENT_SEGWIT, // Deployment of BIP141, BIP143, and BIP147.
     DEPLOYMENT_LEGBIT, // Deployment of Legacy Bits.
     DEPLOYMENT_EQUIHASH, // Deployment of MIP1 - Equihash PoW.
+    DEPLOYMENT_RESERVEALGO, // Deployment of MIP2 (Reserve algos)
     // NOTE: Also add new deployments to VersionBitsDeploymentInfo in versionbits.cpp
     MAX_VERSION_BITS_DEPLOYMENTS
 };
