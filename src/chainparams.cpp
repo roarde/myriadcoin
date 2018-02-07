@@ -295,10 +295,10 @@ public:
         /*** Upstream Chainparams ***/
 
         consensus.nSubsidyHalvingInterval = 80640 * 12;
-        consensus.BIP34Height = 1;
-        consensus.BIP34Hash = uint256S("0x0000d23adc28e33bc05f4bee57c873ae0aab584a6a436e75ac0ed40396f6d86b");
-        consensus.BIP65Height = 641; // ff983c72147a81ac5b8ebfc68b62b39358cac4b8eb5518242e87f499b71c6a51
-        consensus.BIP66Height = 641; // ff983c72147a81ac5b8ebfc68b62b39358cac4b8eb5518242e87f499b71c6a51
+        consensus.BIP34Height = 0;
+        consensus.BIP34Hash = uint256S("0x0000017ce2a79c8bddafbbe47c004aa92b20678c354b34085f62b762084b9788");
+        consensus.BIP65Height = 1;
+        consensus.BIP66Height = 1;
         consensus.MIP2Height = 1;
         consensus.MIP1Height = 1; // allow from block 1
         consensus.powLimit = ArithToUint256(~arith_uint256(0) >> 16);
@@ -333,7 +333,7 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0xff983c72147a81ac5b8ebfc68b62b39358cac4b8eb5518242e87f499b71c6a51"); // 1
 
-        pchMessageStart[0] = 0x01;
+        pchMessageStart[0] = 0x02;
         pchMessageStart[1] = 0xf5;
         pchMessageStart[2] = 0x55;
         pchMessageStart[3] = 0xa4;
@@ -368,13 +368,11 @@ public:
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
             (   0, uint256S("0x0000017ce2a79c8bddafbbe47c004aa92b20678c354b34085f62b762084b9788"))
-            ( 800, uint256S("0x00000071942cef6d87635a92f106d5b1935b1314538af80922c766487afd8b22"))
         };
 
         chainTxData = ChainTxData{
-            // Data as of block 00000071942cef6d87635a92f106d5b1935b1314538af80922c766487afd8b22 (height 800)
-            1504107501,
-            817,
+            1392876393,
+            0,
             0.02
         };
 
