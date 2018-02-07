@@ -49,6 +49,8 @@ struct Params {
     int BIP65Height;
     /** Block height at which BIP66 becomes active */
     int BIP66Height;
+    /** Block height at which MIP2 becomes active */
+    int MIP2Height;
     /** Block height at which MIP1 becomes active */
     int MIP1Height;
     /**

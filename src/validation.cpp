@@ -3123,7 +3123,8 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
             return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid EQUIHASH block");
     }
   
-    bool bMIP2 = (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_RESERVEALGO, versionbitscache) == THRESHOLD_ACTIVE);
+    // MIP2 (reservealgo) activated at MIP2Height
+    bool bMIP2 = (nHeight >= consensusParams.MIP2Height);
     if (bMIP2)
     {
         if (algo >= NUM_ALGOS_IMPL)
