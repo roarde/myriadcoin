@@ -3104,7 +3104,12 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     }
 
     // MIP1 Equihash
-    bool bMIP1 = (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_EQUIHASH, versionbitscache) == THRESHOLD_ACTIVE);
+    int nMIP1Height = consensusParams.MIP1Height;
+    bool bMIP1;
+    if (nMIP1Height <= 0)
+        bMIP1 = (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_EQUIHASH, versionbitscache) == THRESHOLD_ACTIVE);
+    else
+        bMIP1 = (nHeight >= nMIP1Height);
     if (bMIP1)
     {
         if (algo == ALGO_SKEIN)
