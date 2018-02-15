@@ -143,7 +143,7 @@ UniValue generateBlocks(boost::shared_ptr<CReserveScript> coinbaseScript, int nG
             // H(I||...
             crypto_generichash_blake2b_update(&eh_state, (unsigned char*)&ss[0], ss.size());
 
-            while (nMaxTries > 0 && pblock->nNonce < nInnerLoopCount && !CheckProofOfWork(pblock->GetPoWHash(algo, Params().GetConsensus()), miningAlgo, pblock->nBits, Params().GetConsensus())) {
+            while (nMaxTries > 0 && pblock->nNonce < nInnerLoopCount) {
                 ++pblock->nNonce;
                 --nMaxTries;
 
