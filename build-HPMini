@@ -1,0 +1,62 @@
+#!/bin/sh
+
+# An N455 Pineview / Pine Trail
+
+# Linux build
+
+{ [ -d "${BDBDIR}" ]
+} || {
+   {
+      echo
+      echo 'BDBDIR=/path/to/static/berkeley-db-4.8/directory '"$0"
+      echo
+   } >&2
+   exit 1
+}
+
+#make clean
+
+rm -f config.status
+./autogen.sh || echo done
+
+optlevelC=" \
+   -O2 "
+#   -O2 \
+#  -Ofast -flto -fuse-linker-plugin \
+#  -fpredictive-commoning \
+#  -ftree-loop-distribution \
+#  -ftree-vectorize "
+
+optlevelCXX=" \
+   -O2 "
+
+# custom local
+extracflags="$extracflags \
+  -march=native \
+  -mtune=native \
+  -mssse3 \
+  -mfpmath=sse \
+  -m128bit-long-double \
+  -malign-double "
+#  -m128bit-long-double \
+#  -m8bit-idiv "  # Early Bonnell-based likes this.
+
+export \
+   BDB_CFLAGS="-I${BDBDIR}/include" \
+   BDB_LIBS="-L${BDBDIR}/lib -ldb_cxx" \
+   CPPFLAGS="-DUSE_SSE2" \
+   CFLAGS="${optlevelC} ${extracflags}" \
+   CXXFLAGS="${optlevelCXX} ${extracflags}"
+
+./configure \
+   --disable-tests \
+   --disable-gui-tests \
+   --disable-bench
+#   --disable-hardening \
+
+#exit  # To examine the configure first
+
+make clean
+make -j 2
+
+strip -s src/myriadcoind src/myriadcoin-cli src/myriadcoin-tx src/qt/myriad-qt
