@@ -106,6 +106,10 @@ public:
         consensus.nGeoAvgWork_Start = 1400000;
         consensus.nFork1MinBlock = 1764000; // minimum block height where fork 1 takes effect (algo switch, seq algo count change)
 
+        // Legbit parameters (used for v0.11 -> v0.14 compatability)
+        consensus.nLegbitStart = 2306304;
+        consensus.nLegbitStop = 2586528;
+
         // MIP3 parameters
         consensus.nPowTargetSpacingV3a = 2 * 60; // new target time for block spacing across all algorithms (2min)
         consensus.nPowTargetSpacingV3b = 4 * 60; // new target time for block spacing across all algorithms (4min)
@@ -288,6 +292,10 @@ public:
         consensus.nGeoAvgWork_Start = 150;
         consensus.nFork1MinBlock = 601; // minimum block height where fork 1 takes effect (algo switch, seq algo count change)
 
+        // Legbit parameters (used for v0.11 -> v0.14 compatability)
+        consensus.nLegbitStart = 8064;
+        consensus.nLegbitStop = 26208;
+
         // MIP3 parameters
         consensus.nPowTargetSpacingV3a = 2 * 60; // new target time for block spacing across all algorithms (2min)
         consensus.nPowTargetSpacingV3b = 4 * 60; // new target time for block spacing across all algorithms (4min)
@@ -299,6 +307,7 @@ public:
         consensus.nSubsidyHalvingIntervalV2b = 241920; // Longblocks Subsidy halving after adjust block time (4min)
         consensus.nSubsidyHalvingIntervalV2c = 120960; // Longblocks Subsidy halving after adjust block time (8min)
 
+        // Notice for BIP9 bit 2: Please see 'legbit' notes in validation.cpp prior to future use.
         // Deployment of Legacy Blocks. Once activated, keeps v0.11 nodes on the same chain. Should be the first softfork.
         consensus.vDeployments[Consensus::DEPLOYMENT_LEGBIT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_LEGBIT].nStartTime = 1504224000; // September 1st, 2017
@@ -448,6 +457,10 @@ public:
         consensus.nSubsidyHalvingIntervalV2a = 75; // Longblocks Subsidy halving after adjust block time (2min)
         consensus.nSubsidyHalvingIntervalV2b = 37; // Longblocks Subsidy halving after adjust block time (4min)
         consensus.nSubsidyHalvingIntervalV2c = 18; // Longblocks Subsidy halving after adjust block time (8min)
+
+        // Legbit parameters (used for v0.11 -> v0.14 compatability)
+        consensus.nLegbitStart = 0;
+        consensus.nLegbitStop = 0;
 
         consensus.vDeployments[Consensus::DEPLOYMENT_LEGBIT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_LEGBIT].nStartTime = 0;
