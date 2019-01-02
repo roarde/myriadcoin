@@ -30,6 +30,10 @@ const struct BIP9DeploymentInfo VersionBitsDeploymentInfo[Consensus::MAX_VERSION
     {
         /*.name =*/ "longblocks",
         /*.gbt_force =*/ true,
+    },
+    {
+        /*.name =*/ "argon2d",
+        /*.gbt_force =*/ false,
     }
 };
 
