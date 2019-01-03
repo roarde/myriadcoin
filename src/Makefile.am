@@ -505,6 +505,9 @@ ARGON2D_DIST = crypto/argon2/ref.c
 ARGON2D_DIST += crypto/argon2/ref.h
 ARGON2D_DIST += crypto/argon2/opt.c
 ARGON2D_DIST += crypto/argon2/opt.h
+ARGON2D_DIST += crypto/argon2/opt.h
+ARGON2D_DIST += crypto/argon2/blamka-round-opt.h
+ARGON2D_DIST += crypto/argon2/blamka-round-ref.h
 
 CLEANFILES = $(EXTRA_LIBRARIES)
 
