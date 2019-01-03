@@ -501,6 +501,9 @@ YESCRYPT_DIST = crypto/yescrypt/yescrypt-platform.c
 YESCRYPT_DIST += crypto/yescrypt/yescrypt-opt.c
 YESCRYPT_DIST += crypto/yescrypt/yescrypt-simd.c
 
+ARGON2D_DIST = crypto/argon2/ref.c
+ARGON2D_DIST += crypto/argon2/opt.c
+
 CLEANFILES = $(EXTRA_LIBRARIES)
 
 CLEANFILES += *.gcda *.gcno
@@ -516,7 +519,7 @@ CLEANFILES += wallet/*.gcda wallet/*.gcno
 CLEANFILES += wallet/test/*.gcda wallet/test/*.gcno
 CLEANFILES += zmq/*.gcda zmq/*.gcno
 
-DISTCLEANFILES = obj/build.h
+EXTRA_DIST = $(CTAES_DIST) $(YESCRYPT_DIST) $(ARGON2D_DIST)
 
 EXTRA_DIST = $(CTAES_DIST) $(YESCRYPT_DIST)
 
