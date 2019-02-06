@@ -259,10 +259,6 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha512.cpp \
   crypto/sha512.h
 
-if USE_ASM
-crypto_libbitcoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp
-endif
-
 # consensus: shared between all executables that validate any consensus rules.
 libbitcoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_consensus_a_CFLAGS = $(AM_CFLAGS) $(PIC_FLAGS)
@@ -299,7 +295,7 @@ libbitcoin_consensus_a_SOURCES = \
   uint256.h \
   utilstrencodings.cpp \
   utilstrencodings.h \
-  version.h
+  version.h \
   crypto/hashgroestl.h \
   crypto/hashqubit.h \
   crypto/hashskein.h \
@@ -524,9 +520,9 @@ CLEANFILES += wallet/*.gcda wallet/*.gcno
 CLEANFILES += wallet/test/*.gcda wallet/test/*.gcno
 CLEANFILES += zmq/*.gcda zmq/*.gcno
 
-EXTRA_DIST = $(CTAES_DIST) $(YESCRYPT_DIST) $(ARGON2D_DIST)
+DISTCLEANFILES = obj/build.h
 
-EXTRA_DIST = $(CTAES_DIST) $(YESCRYPT_DIST)
+EXTRA_DIST = $(CTAES_DIST) $(YESCRYPT_DIST) $(ARGON2D_DIST)
 
 config/bitcoin-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)

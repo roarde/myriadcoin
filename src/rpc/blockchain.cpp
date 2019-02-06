@@ -1172,6 +1172,7 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
             "  \"difficulty_qubit\": xxxxxx,          (numeric) the current qubit difficulty\n"
             "  \"difficulty_yescrypt\": xxxxxx,          (numeric) the current yescrypt difficulty\n"
             "  \"difficulty_argon2d\": xxxxxx,          (numeric) the current argon2d difficulty\n"
+            "  \"mediantime\": xxxxxx,     (numeric) median time for the current best block\n"
             "  \"verificationprogress\": xxxx, (numeric) estimate of verification progress [0..1]\n"
             "  \"chainwork\": \"xxxx\"     (string) total amount of work in active chain, in hexadecimal\n"
             "  \"pruned\": xx,             (boolean) if the blocks are subject to pruning\n"

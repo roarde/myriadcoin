@@ -63,7 +63,14 @@ EXTRA_DIST += \
 	test/data/txcreatesignv2.hex \
 	crypto/yescrypt/yescrypt-platform.c \
 	crypto/yescrypt/yescrypt-opt.c \
-	crypto/yescrypt/yescrypt-simd.c
+	crypto/yescrypt/yescrypt-simd.c \
+	crypto/argon2/ref.c \
+	crypto/argon2/ref.h \
+	crypto/argon2/opt.c \
+	crypto/argon2/opt.h \
+	crypto/argon2/opt.h \
+	crypto/argon2/blamka-round-opt.h \
+	crypto/argon2/blamka-round-ref.h
 
 JSON_TEST_FILES = \
   test/data/script_tests.json \
