@@ -1946,6 +1946,13 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
     }
 
+    // Myriadcoin: always follow testnet checkpoints:
+    if (chainparams.NetworkIDString() == "test") {
+        CBlockIndex* pcheckpoint = Checkpoints::GetLastCheckpoint(chainparams.Checkpoints());
+        if (pindex->nHeight == pcheckpoint->nHeight && block.GetHash() != *pcheckpoint->phashBlock)
+            return state.DoS(100, error("%s: forked chain hash different from checkpoint hash (height %d),", __func__,pcheckpoint->nHeight), REJECT_CHECKPOINT, "bad-fork-prior-to-checkpoint");
+    }
+
     // Start enforcing BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY) using versionbits logic.
     int nLockTimeFlags = 0;
     if (VersionBitsState(pindex->pprev, chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV, versionbitscache) == THRESHOLD_ACTIVE) {

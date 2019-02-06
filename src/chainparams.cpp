@@ -366,7 +366,7 @@ public:
         consensus.nMinimumChainWork = uint256S("0x00");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0xff983c72147a81ac5b8ebfc68b62b39358cac4b8eb5518242e87f499b71c6a51"); // 1
+        consensus.defaultAssumeValid = uint256S("0x000000c00310153e400312a5f10a51c14abd4d4456ad92a8efcb516c7c00fde5"); // 26607
 
         pchMessageStart[0] = 0x01;
         pchMessageStart[1] = 0xf5;
@@ -402,14 +402,15 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (   0, uint256S("0x0000017ce2a79c8bddafbbe47c004aa92b20678c354b34085f62b762084b9788"))
-            ( 800, uint256S("0x00000071942cef6d87635a92f106d5b1935b1314538af80922c766487afd8b22"))
+            (     0, uint256S("0x0000017ce2a79c8bddafbbe47c004aa92b20678c354b34085f62b762084b9788"))
+            (   800, uint256S("0x00000071942cef6d87635a92f106d5b1935b1314538af80922c766487afd8b22"))
+            ( 26607, uint256S("0x000000c00310153e400312a5f10a51c14abd4d4456ad92a8efcb516c7c00fde5"))
         };
 
         chainTxData = ChainTxData{
-            // Data as of block 00000071942cef6d87635a92f106d5b1935b1314538af80922c766487afd8b22 (height 800)
-            1504107501,
-            817,
+            // Data as of block 000000c00310153e400312a5f10a51c14abd4d4456ad92a8efcb516c7c00fde5 (height 26607)
+            1549032928,
+            26673,
             0.02
         };
 
