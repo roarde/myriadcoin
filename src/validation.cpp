@@ -1946,6 +1946,13 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
     }
 
+    // Myriadcoin: always follow testnet checkpoints:
+    if (chainparams.NetworkIDString() == "test") {
+        CBlockIndex* pcheckpoint = Checkpoints::GetLastCheckpoint(chainparams.Checkpoints());
+        if (pindex->nHeight == pcheckpoint->nHeight && block.GetHash() != *pcheckpoint->phashBlock)
+            return state.DoS(100, error("%s: forked chain hash different from checkpoint hash (height %d),", __func__,pcheckpoint->nHeight), REJECT_CHECKPOINT, "bad-fork-prior-to-checkpoint");
+    }
+
     // Start enforcing BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY) using versionbits logic.
     int nLockTimeFlags = 0;
     if (VersionBitsState(pindex->pprev, chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV, versionbitscache) == THRESHOLD_ACTIVE) {
@@ -3118,6 +3125,21 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
             return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid YESCRYPT block");
     }
 
+    // Check for algo switch 2 (Argon2d replacing Skein)
+    // Active when consensus reached via versionbits (bit 6)
+    // Myriadcoin TODO - hardcode with nHeight check once consensus reached and Argon2 mining is active.
+    bool bAlgoSwitch2 = (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_ARGON2D, versionbitscache) == THRESHOLD_ACTIVE);
+    if (bAlgoSwitch2)
+    {
+        if (algo == ALGO_SKEIN)
+            return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid SKEIN block");
+    }
+    else
+    {
+        if (algo == ALGO_ARGON2D)
+            return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid ARGON2D block");
+    }
+
     // MIP2 (reservealgo) activated at MIP2Height
     bool bMIP2 = (nHeight >= consensusParams.MIP2Height);
     if (bMIP2)
@@ -3255,7 +3277,7 @@ static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state
 
         if (!ContextualCheckBlockHeader(block, state, chainparams.GetConsensus(), pindexPrev, GetAdjustedTime()))
             return error("%s: Consensus::ContextualCheckBlockHeader: %s, %s", __func__, hash.ToString(), FormatStateMessage(state));
-        
+
         // Check count of sequence of same algo
         int nHeight = pindexPrev->nHeight+1;
         if (nHeight > chainparams.GetConsensus().nBlockSequentialAlgoRuleStart1)

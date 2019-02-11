@@ -1171,6 +1171,7 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
             "  \"difficulty_skein\": xxxxxx,     (numeric) the current skein difficulty\n"
             "  \"difficulty_qubit\": xxxxxx,          (numeric) the current qubit difficulty\n"
             "  \"difficulty_yescrypt\": xxxxxx,          (numeric) the current yescrypt difficulty\n"
+            "  \"difficulty_argon2d\": xxxxxx,          (numeric) the current argon2d difficulty\n"
             "  \"mediantime\": xxxxxx,     (numeric) median time for the current best block\n"
             "  \"verificationprogress\": xxxx, (numeric) estimate of verification progress [0..1]\n"
             "  \"chainwork\": \"xxxx\"     (string) total amount of work in active chain, in hexadecimal\n"
@@ -1214,6 +1215,7 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     obj.push_back(Pair("difficulty_skein",      (double)GetDifficulty(NULL, ALGO_SKEIN)));
     obj.push_back(Pair("difficulty_qubit",      (double)GetDifficulty(NULL, ALGO_QUBIT)));
     obj.push_back(Pair("difficulty_yescrypt",   (double)GetDifficulty(NULL, ALGO_YESCRYPT)));
+    obj.push_back(Pair("difficulty_argon2d",    (double)GetDifficulty(NULL, ALGO_ARGON2D)));
     obj.push_back(Pair("mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast()));
     obj.push_back(Pair("verificationprogress",  GuessVerificationProgress(Params().TxData(), chainActive.Tip())));
     obj.push_back(Pair("chainwork",             chainActive.Tip()->nChainWork.GetHex()));
@@ -1231,6 +1233,7 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     BIP9SoftForkDescPushBack(bip9_softforks, "legbit", consensusParams, Consensus::DEPLOYMENT_LEGBIT);
     BIP9SoftForkDescPushBack(bip9_softforks, "reservealgo", consensusParams, Consensus::DEPLOYMENT_RESERVEALGO);
     BIP9SoftForkDescPushBack(bip9_softforks, "longblocks", consensusParams, Consensus::DEPLOYMENT_LONGBLOCKS);
+    BIP9SoftForkDescPushBack(bip9_softforks, "argon2d", consensusParams, Consensus::DEPLOYMENT_ARGON2D);
     obj.push_back(Pair("softforks",             softforks));
     obj.push_back(Pair("bip9_softforks", bip9_softforks));
 

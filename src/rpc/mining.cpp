@@ -253,6 +253,7 @@ UniValue getmininginfo(const JSONRPCRequest& request)
             "  \"difficulty_skein\": xxxxxx,    (numeric) the current skein difficulty\n"
             "  \"difficulty_qubit\": xxxxxx,    (numeric) the current qubit difficulty\n"
             "  \"difficulty_yescrypt\": xxxxxx, (numeric) the current yescrypt difficulty\n"
+            "  \"difficulty_argon2d\": xxxxxx, (numeric) the current argon2d difficulty\n"
             "  \"errors\": \"...\"            (string) Current errors\n"
             "  \"networkhashps\": nnn,        (numeric) The network hashes per second\n"
             "  \"pooledtx\": n                (numeric) The size of the mempool\n"
@@ -280,6 +281,7 @@ UniValue getmininginfo(const JSONRPCRequest& request)
     obj.push_back(Pair("difficulty_skein",       (double)GetDifficulty(NULL, ALGO_SKEIN)));
     obj.push_back(Pair("difficulty_qubit",       (double)GetDifficulty(NULL, ALGO_QUBIT)));
     obj.push_back(Pair("difficulty_yescrypt",    (double)GetDifficulty(NULL, ALGO_YESCRYPT)));
+    obj.push_back(Pair("difficulty_argon2d",     (double)GetDifficulty(NULL, ALGO_ARGON2D)));
     obj.push_back(Pair("errors",           GetWarnings("statusbar")));
     obj.push_back(Pair("networkhashps",    getnetworkhashps(request)));
     obj.push_back(Pair("pooledtx",         (uint64_t)mempool.size()));
