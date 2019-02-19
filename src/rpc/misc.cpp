@@ -64,6 +64,7 @@ UniValue getinfo(const JSONRPCRequest& request)
             "  \"difficulty_skein\": xxxxxx,     (numeric) the current difficulty for skein\n"
             "  \"difficulty_qubit\": xxxxxx,     (numeric) the current difficulty for qubit\n"
             "  \"difficulty_yescrypt\": xxxxxx,  (numeric) the current difficulty for yescrypt\n"
+            "  \"difficulty_argon2d\": xxxxxx,  (numeric) the current difficulty for argon2d\n"
             "  \"testnet\": true|false,      (boolean) if the server is using testnet or not\n"
             "  \"keypoololdest\": xxxxxx,    (numeric) the timestamp (seconds since Unix epoch) of the oldest pre-generated key in the key pool\n"
             "  \"keypoolsize\": xxxx,        (numeric) how many new keys are pre-generated\n"
@@ -109,6 +110,7 @@ UniValue getinfo(const JSONRPCRequest& request)
     obj.push_back(Pair("difficulty_skein",   (double)GetDifficulty(NULL, ALGO_SKEIN)));
     obj.push_back(Pair("difficulty_qubit",   (double)GetDifficulty(NULL, ALGO_QUBIT)));
     obj.push_back(Pair("difficulty_yescrypt",(double)GetDifficulty(NULL, ALGO_YESCRYPT)));
+    obj.push_back(Pair("difficulty_argon2d",(double)GetDifficulty(NULL, ALGO_ARGON2D)));
     obj.push_back(Pair("testnet",       Params().NetworkIDString() == CBaseChainParams::TESTNET));
 #ifdef ENABLE_WALLET
     if (pwalletMain) {
