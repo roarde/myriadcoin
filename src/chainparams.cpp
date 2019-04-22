@@ -105,6 +105,7 @@ public:
         consensus.nBlockAlgoNormalisedWorkDecayStart2 = 932000; // block where weight decay starts
         consensus.nGeoAvgWork_Start = 1400000;
         consensus.nFork1MinBlock = 1764000; // minimum block height where fork 1 takes effect (algo switch, seq algo count change)
+        consensus.nFork2MinBlock = 2772000; // minimum block height where fork 2 takes effect (algo switch, GetGeometricPrevWork2)
 
         // Legbit parameters (used for v0.11 -> v0.14 compatability)
         consensus.nLegbitStart = 2306304;
@@ -297,6 +298,7 @@ public:
         consensus.nBlockAlgoNormalisedWorkDecayStart2 = 0; // block where weight decay starts
         consensus.nGeoAvgWork_Start = 150;
         consensus.nFork1MinBlock = 601; // minimum block height where fork 1 takes effect (algo switch, seq algo count change)
+        consensus.nFork2MinBlock = 32256; // minimum block height where fork 2 takes effect (algo switch, GetGeometricPrevWork2)
 
         // Legbit parameters (used for v0.11 -> v0.14 compatability)
         consensus.nLegbitStart = 8064;
@@ -458,6 +460,7 @@ public:
         consensus.nBlockAlgoNormalisedWorkDecayStart2 = 0; // block where weight decay starts
         consensus.nGeoAvgWork_Start = 0;
         consensus.nFork1MinBlock = 601; // minimum block height where fork 1 takes effect (algo switch, seq algo count change)
+        consensus.nFork2MinBlock = 32256; // minimum block height where fork 2 takes effect (algo switch, GetGeometricPrevWork2)
 
         // MIP3 parameters
         consensus.nPowTargetSpacingV3a = 2 * 60; // new target time for block spacing across all algorithms (2min)
