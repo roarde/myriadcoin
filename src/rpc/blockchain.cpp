@@ -100,6 +100,7 @@ double GetDifficulty(const CChain& chain, const CBlockIndex* blockindex, int alg
 }
 
 static int ComputeNextBlockAndDepth(const CBlockIndex* tip, const CBlockIndex* blockindex, const CBlockIndex*& next)
+{
     next = tip->GetAncestor(blockindex->nHeight + 1);
     if (next && next->pprev == blockindex) {
         return tip->nHeight - blockindex->nHeight + 1;

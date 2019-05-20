@@ -7,9 +7,10 @@
 
 #include <arith_uint256.h>
 #include <chain.h>
+#include <logging.h>
 #include <primitives/block.h>
 #include <uint256.h>
-#include <util.h>
+#include <util/strencodings.h>
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo, const Consensus::Params& params)
 {
