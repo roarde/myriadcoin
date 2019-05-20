@@ -122,32 +122,32 @@ UniValue AuxpowToJSON(const CAuxPow& auxpow)
 
     {
         UniValue tx(UniValue::VOBJ);
-        tx.push_back(Pair("hex", EncodeHexTx(*auxpow.tx)));
-        TxToJSON(*auxpow.tx, auxpow.parentBlock.GetHash(), tx);
-        result.push_back(Pair("tx", tx));
+        tx.pushKV("hex", EncodeHexTx(*auxpow.coinbaseTx.tx));
+        TxToJSON(*auxpow.coinbaseTx.tx, auxpow.parentBlock.GetHash(), tx);
+        result.pushKV("tx", tx);
     }
 
-    result.push_back(Pair("index", auxpow.nIndex));
-    result.push_back(Pair("chainindex", auxpow.nChainIndex));
+    result.pushKV("index", auxpow.coinbaseTx.nIndex);
+    result.pushKV("chainindex", auxpow.nChainIndex);
 
     {
         UniValue branch(UniValue::VARR);
-        for (const auto& node : auxpow.vMerkleBranch)
+        for (const auto& node : auxpow.coinbaseTx.vMerkleBranch)
             branch.push_back(node.GetHex());
-        result.push_back(Pair("merklebranch", branch));
+        result.pushKV("merklebranch", branch);
     }
 
     {
         UniValue branch(UniValue::VARR);
         for (const auto& node : auxpow.vChainMerkleBranch)
             branch.push_back(node.GetHex());
-        result.push_back(Pair("chainmerklebranch", branch));
+        result.pushKV("chainmerklebranch", branch);
     }
 
     CDataStream ssParent(SER_NETWORK, PROTOCOL_VERSION);
     ssParent << auxpow.parentBlock;
     const std::string strHex = HexStr(ssParent.begin(), ssParent.end());
-    result.push_back(Pair("parentblock", strHex));
+    result.push_KV("parentblock", strHex);
 
     return result;
 }
