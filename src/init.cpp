@@ -31,6 +31,8 @@
 #include <policy/feerate.h>
 #include <policy/fees.h>
 #include <policy/policy.h>
+#include <rpc/auxpow_miner.h>
+#include <rpc/mining.h>
 #include <rpc/server.h>
 #include <rpc/register.h>
 #include <rpc/blockchain.h>
@@ -220,6 +222,10 @@ void Shutdown(InitInterfaces& interfaces)
     if (peerLogic) UnregisterValidationInterface(peerLogic.get());
     if (g_connman) g_connman->Stop();
     if (g_txindex) g_txindex->Stop();
+
+    if (g_auxpow_miner != nullptr) {
+        g_auxpow_miner.reset();
+    }
 
     StopTorControl();
 
