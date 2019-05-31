@@ -56,6 +56,9 @@ inline std::string _(const char* psz)
 void SetupEnvironment();
 bool SetupNetworking();
 
+// Myriadcoin miningAlgo
+extern int miningAlgo;
+
 template<typename... Args>
 bool error(const char* fmt, const Args&... args)
 {

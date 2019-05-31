@@ -1171,6 +1171,26 @@ bool AppInitParameterInteraction()
         fEnableReplacement = (std::find(vstrReplacementModes.begin(), vstrReplacementModes.end(), "fee") != vstrReplacementModes.end());
     }
 
+    // Algo
+    std::string strAlgo = gArgs.GetArg("-algo", "sha256d");
+    transform(strAlgo.begin(),strAlgo.end(),strAlgo.begin(),::tolower);
+    if (strAlgo == "sha" || strAlgo == "sha256" || strAlgo == "sha256d")
+        miningAlgo = ALGO_SHA256D;
+    else if (strAlgo == "scrypt")
+        miningAlgo = ALGO_SCRYPT;
+    else if (strAlgo == "groestl" || strAlgo == "groestlsha2")
+        miningAlgo = ALGO_GROESTL;
+    else if (strAlgo == "skein" || strAlgo == "skeinsha2")
+        miningAlgo = ALGO_SKEIN;
+    else if (strAlgo == "q2c" || strAlgo == "qubit")
+        miningAlgo = ALGO_QUBIT;
+    else if (strAlgo == "yescrypt")
+        miningAlgo = ALGO_YESCRYPT;
+    else if (strAlgo == "argon2d" || strAlgo == "argon2" || strAlgo == "argon2d4096")
+        miningAlgo = ALGO_ARGON2D;
+    else
+        miningAlgo = ALGO_SHA256D;
+
     return true;
 
 }

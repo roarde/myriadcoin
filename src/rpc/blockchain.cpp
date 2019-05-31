@@ -21,6 +21,7 @@
 #include <policy/rbf.h>
 #include <primitives/transaction.h>
 #include <rpc/server.h>
+#include <rpc/rawtransaction.h>
 #include <rpc/util.h>
 #include <script/descriptor.h>
 #include <streams.h>
@@ -114,8 +115,6 @@ double GetDifficulty(const CBlockIndex* blockindex, int algo)
     return GetDifficulty(chainActive, blockindex, algo);
 }
 
-namespace
-{
 UniValue AuxpowToJSON(const CAuxPow& auxpow)
 {
     UniValue result(UniValue::VOBJ);
@@ -147,11 +146,10 @@ UniValue AuxpowToJSON(const CAuxPow& auxpow)
     CDataStream ssParent(SER_NETWORK, PROTOCOL_VERSION);
     ssParent << auxpow.parentBlock;
     const std::string strHex = HexStr(ssParent.begin(), ssParent.end());
-    result.push_KV("parentblock", strHex);
+    result.pushKV("parentblock", strHex);
 
     return result;
 }
-} // anonymous namespace
 
 UniValue blockheaderToJSON(const CBlockIndex* tip, const CBlockIndex* blockindex)
 {

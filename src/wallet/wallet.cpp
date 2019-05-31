@@ -4460,8 +4460,6 @@ CWalletKey::CWalletKey(int64_t nExpires)
     nTimeExpires = nExpires;
 }
 
-// Myriadcoin: CMerkle in auxpow
-/*
 void CMerkleTx::SetMerkleBranch(const uint256& block_hash, int posInBlock)
 {
     // Update the tx's hashBlock
@@ -4495,7 +4493,6 @@ bool CMerkleTx::IsImmatureCoinBase(interfaces::Chain::Lock& locked_chain) const
     // note GetBlocksToMaturity is 0 for non-coinbase tx
     return GetBlocksToMaturity(locked_chain) > 0;
 }
-*/
 
 bool CWalletTx::AcceptToMemoryPool(interfaces::Chain::Lock& locked_chain, const CAmount& nAbsurdFee, CValidationState& state)
 {
