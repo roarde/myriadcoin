@@ -30,6 +30,10 @@
         <translation>Eliminar la dirección actualmente seleccionada de la lista</translation>
     </message>
     <message>
+        <source>Enter address or label to search</source>
+        <translation>Ingrese dirección o capa a buscar </translation>
+    </message>
+    <message>
         <source>Export the data in the current tab to a file</source>
         <translation>Exportar la información en la tabla actual a un archivo</translation>
     </message>
@@ -130,10 +134,6 @@
         <translation>&amp;Vista previa</translation>
     </message>
     <message>
-        <source>Node</source>
-        <translation>Nodo</translation>
-    </message>
-    <message>
         <source>Show general overview of wallet</source>
         <translation>Mostrar la vista previa general de la cartera</translation>
     </message>
@@ -178,14 +178,6 @@
         <translation>&amp;Cambiar contraseña...</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses...</source>
-        <translation>Direcciones de &amp;envío...</translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses...</source>
-        <translation>Direcciones de &amp;recepción...</translation>
-    </message>
-    <message>
         <source>Open &amp;URI...</source>
         <translation>Abrir &amp;URL...</translation>
     </message>
@@ -220,10 +212,6 @@
     <message>
         <source>Bitcoin</source>
         <translation>Bitcoin</translation>
-    </message>
-    <message>
-        <source>Wallet</source>
-        <translation>Cartera</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -369,15 +357,7 @@
         <source>Command-line options</source>
         <translation>opciones de la Linea de comandos</translation>
     </message>
-    <message>
-        <source>Usage:</source>
-        <translation>Uso:</translation>
-    </message>
-    <message>
-        <source>command-line options</source>
-        <translation>Opciones de comando de lineas</translation>
-    </message>
-    </context>
+</context>
 <context>
     <name>Intro</name>
     <message>
@@ -404,10 +384,6 @@
     <message>
         <source>Options</source>
         <translation>Opciones</translation>
-    </message>
-    <message>
-        <source>Active command-line options that override above options:</source>
-        <translation>Activar las opciones de linea de comando que sobre escriben las siguientes opciones:</translation>
     </message>
     <message>
         <source>W&amp;allet</source>
@@ -491,6 +467,10 @@
     <message>
         <source>Copy &amp;Address</source>
         <translation>&amp;Copiar dirección</translation>
+    </message>
+    <message>
+        <source>Wallet</source>
+        <translation>Cartera</translation>
     </message>
     </context>
 <context>
@@ -637,6 +617,9 @@
     <name>UnitDisplayStatusBarControl</name>
     </context>
 <context>
+    <name>WalletController</name>
+    </context>
+<context>
     <name>WalletFrame</name>
     </context>
 <context>
@@ -656,24 +639,12 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Options:</source>
-        <translation>Opciones:</translation>
-    </message>
-    <message>
         <source>Bitcoin Core</source>
         <translation>nucleo Bitcoin</translation>
     </message>
     <message>
-        <source>&lt;category&gt; can be:</source>
-        <translation>&lt;categoria&gt; puede ser:</translation>
-    </message>
-    <message>
         <source>Verifying blocks...</source>
         <translation>Verificando bloques...</translation>
-    </message>
-    <message>
-        <source>Wallet options:</source>
-        <translation>Opciones de cartera:</translation>
     </message>
     <message>
         <source>Information</source>
