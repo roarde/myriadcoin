@@ -38,7 +38,7 @@ void auxMiningCheck()
      past the point of merge-mining start.  Check nevertheless.  */
   {
     LOCK (cs_main);
-    const auto auxpowStart = Params ().GetConsensus ().nAuxpowStartHeight;
+    const auto auxpowStart = Params ().GetConsensus ().nStartAuxPow;
     if (chainActive.Height () + 1 < auxpowStart)
       throw std::runtime_error ("mining auxblock method is not yet available");
   }
@@ -67,7 +67,7 @@ AuxpowMiner::getCurrentBlock (const CScript& scriptPubKey, uint256& target)
 
         /* Create new block with nonce = 0 and extraNonce = 1.  */
         std::unique_ptr<CBlockTemplate> newBlock
-            = BlockAssembler (Params ()).CreateNewBlock (scriptPubKey);
+            = BlockAssembler (Params ()).CreateNewBlock (scriptPubKey, miningAlgo);
         if (newBlock == nullptr)
           throw JSONRPCError (RPC_OUT_OF_MEMORY, "out of memory");
 
