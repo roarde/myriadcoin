@@ -54,7 +54,7 @@ std::shared_ptr<CBlock> Block(const uint256& prev_hash)
     CScript pubKey;
     pubKey << i++ << OP_TRUE;
 
-    auto ptemplate = BlockAssembler(Params()).CreateNewBlock(pubKey);
+    auto ptemplate = BlockAssembler(Params()).CreateNewBlock(pubKey, ALGO_SHA256D);
     auto pblock = std::make_shared<CBlock>(ptemplate->block);
     pblock->hashPrevBlock = prev_hash;
     pblock->nTime = ++time;
@@ -71,7 +71,7 @@ std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock)
 {
     pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
 
-    while (!CheckProofOfWork(pblock->GetHash(), pblock->nBits, Params().GetConsensus())) {
+    while (!CheckProofOfWork(pblock->GetHash(), pblock->GetAlgo(), pblock->nBits, Params().GetConsensus())) {
         ++(pblock->nNonce);
     }
 

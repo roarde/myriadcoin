@@ -27,7 +27,7 @@ static std::shared_ptr<CBlock> PrepareBlock(const CScript& coinbase_scriptPubKey
 {
     auto block = std::make_shared<CBlock>(
         BlockAssembler{Params()}
-            .CreateNewBlock(coinbase_scriptPubKey)
+            .CreateNewBlock(coinbase_scriptPubKey, miningAlgo)
             ->block);
 
     block->nTime = ::chainActive.Tip()->GetMedianTimePast() + 1;
@@ -41,7 +41,7 @@ static CTxIn MineBlock(const CScript& coinbase_scriptPubKey)
 {
     auto block = PrepareBlock(coinbase_scriptPubKey);
 
-    while (!CheckProofOfWork(block->GetHash(), block->nBits, Params().GetConsensus())) {
+    while (!CheckProofOfWork(block->GetHash(), block->GetAlgo(), block->nBits, Params().GetConsensus())) {
         ++block->nNonce;
         assert(block->nNonce);
     }
