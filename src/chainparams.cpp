@@ -16,7 +16,6 @@
 #include <arith_uint256.h>
 
 #include <assert.h>
-#include <memory>
 
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
