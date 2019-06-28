@@ -32,8 +32,6 @@
 
 #include <memory>
 
-#include <memory>
-
 #if defined(NDEBUG)
 # error "Bitcoin cannot be compiled without assertions."
 #endif

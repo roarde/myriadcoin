@@ -292,7 +292,9 @@ BOOST_FIXTURE_TEST_CASE (check_auxpow, BasicTestingSetup)
   builder2.parentBlock.SetChainId (100);
   BOOST_CHECK (builder2.get ().check (hashAux, ourChainId, params));
   builder2.parentBlock.SetChainId (ourChainId);
-  BOOST_CHECK (!builder2.get ().check (hashAux, ourChainId, params));
+  // Myriadcoin allows the same chain ID:
+  //BOOST_CHECK (!builder2.get ().check (hashAux, ourChainId, params));
+  BOOST_CHECK (builder2.get ().check (hashAux, ourChainId, params));
 
   /* Disallow too long merkle branches.  */
   builder2 = builder;
@@ -435,7 +437,9 @@ BOOST_FIXTURE_TEST_CASE (auxpow_pow, BasicTestingSetup)
 
   block.nVersion = 2;
   mineBlock (block, true);
-  BOOST_CHECK (!CheckProofOfWork (block, params));
+  // Myriadcoin allows this:
+  //BOOST_CHECK (!CheckProofOfWork (block, params));
+  BOOST_CHECK (CheckProofOfWork (block, params));
 
   block.SetBaseVersion (2, params.nAuxpowChainId);
   mineBlock (block, true);
@@ -443,7 +447,9 @@ BOOST_FIXTURE_TEST_CASE (auxpow_pow, BasicTestingSetup)
 
   block.SetChainId (params.nAuxpowChainId + 1);
   mineBlock (block, true);
-  BOOST_CHECK (!CheckProofOfWork (block, params));
+  // Myriadcoin allows this:
+  //BOOST_CHECK (!CheckProofOfWork (block, params));
+  BOOST_CHECK (CheckProofOfWork (block, params));
 
   /* Check the case when the block does not have auxpow (this is true
      right now).  */

@@ -66,7 +66,7 @@ const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/myriadcoin-paymentreque
 //
 static QString ipcServerName()
 {
-    QString name("MyriadQt");
+    QString name("MyriadcoinQt");
 
     // Append a simple hash of the datadir
     // Note that GetDataDir(true) returns a different path
