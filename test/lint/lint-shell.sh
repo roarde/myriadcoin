@@ -43,5 +43,6 @@ disabled=(
     SC2230 # which is non-standard. Use builtin 'command -v' instead.
     SC2236 # Don't force -n instead of ! -z.
 )
-shellcheck -e "$(IFS=","; echo "${disabled[*]}")" \
-    $(git ls-files -- "*.sh" | grep -vE 'src/(secp256k1|univalue)/')
+# Myriadcoin: disable lint shellcheck
+#shellcheck -e "$(IFS=","; echo "${disabled[*]}")" \
+#    $(git ls-files -- "*.sh" | grep -vE 'src/(secp256k1|univalue)/')

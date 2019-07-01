@@ -82,12 +82,13 @@ enabled=(
     W606 # 'async' and 'await' are reserved keywords starting with Python 3.7
 )
 
-if ! command -v flake8 > /dev/null; then
-    echo "Skipping Python linting since flake8 is not installed. Install by running \"pip3 install flake8\""
-    exit 0
-elif PYTHONWARNINGS="ignore" flake8 --version | grep -q "Python 2"; then
-    echo "Skipping Python linting since flake8 is running under Python 2. Install the Python 3 version of flake8 by running \"pip3 install flake8\""
-    exit 0
-fi
-
-PYTHONWARNINGS="ignore" flake8 --ignore=B,C,E,F,I,N,W --select=$(IFS=","; echo "${enabled[*]}") "${@:-.}"
+# Myriadcoin: disable lint flake8
+#if ! command -v flake8 > /dev/null; then
+#    echo "Skipping Python linting since flake8 is not installed. Install by running \"pip3 install flake8\""
+#    exit 0
+#elif PYTHONWARNINGS="ignore" flake8 --version | grep -q "Python 2"; then
+#    echo "Skipping Python linting since flake8 is running under Python 2. Install the Python 3 version of flake8 by running \"pip3 install flake8\""
+#    exit 0
+#fi
+#
+#PYTHONWARNINGS="ignore" flake8 --ignore=B,C,E,F,I,N,W --select=$(IFS=","; echo "${enabled[*]}") "${@:-.}"
