@@ -15,8 +15,6 @@
 
 #include <memory>
 
-#include <memory>
-
 class CAddrManSerializationMock : public CAddrMan
 {
 public:

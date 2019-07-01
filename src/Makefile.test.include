@@ -129,7 +129,10 @@ BITCOIN_TESTS =\
   test/uint256_tests.cpp \
   test/util_tests.cpp \
   test/validation_block_tests.cpp \
-  test/versionbits_tests.cpp \
+  test/versionbits_tests.cpp
+
+# Myriadcoin: test_bitcoin crypto source includes #
+BITCOIN_TESTS_CRYPTO =\
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/common.h \
@@ -207,7 +210,7 @@ BITCOIN_TEST_SUITE += \
   wallet/test/init_test_fixture.h
 endif
 
-test_test_myriadcoin_SOURCES = $(BITCOIN_TEST_SUITE) $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
+test_test_myriadcoin_SOURCES = $(BITCOIN_TEST_SUITE) $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES) $(BITCOIN_TESTS_CRYPTO)
 test_test_myriadcoin_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(TESTDEFS) $(EVENT_CFLAGS)
 test_test_myriadcoin_LDADD =
 if ENABLE_WALLET

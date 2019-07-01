@@ -39,6 +39,13 @@ EXPECTED_CIRCULAR_DEPENDENCIES=(
     "qt/addressbookpage -> qt/bitcoingui -> qt/walletview -> qt/signverifymessagedialog -> qt/addressbookpage"
     "qt/guiutil -> qt/walletmodel -> qt/optionsmodel -> qt/intro -> qt/guiutil"
     "qt/addressbookpage -> qt/bitcoingui -> qt/walletview -> qt/sendcoinsdialog -> qt/sendcoinsentry -> qt/addressbookpage"
+    "auxpow -> primitives/block -> auxpow"
+    "chain -> pow -> chain"
+    "chain -> validation -> chain"
+    "chain -> validation -> consensus/tx_verify -> chain"
+    "chain -> validation -> txdb -> chain"
+    "chain -> validation -> versionbits -> chain"
+    "init -> rpc/blockchain -> rpc/rawtransaction -> init"
 )
 
 EXIT_CODE=0
