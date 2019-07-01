@@ -8,12 +8,13 @@
 
 export LC_ALL=C
 
-if ! command -v vulture > /dev/null; then
-    echo "Skipping Python dead code linting since vulture is not installed. Install by running \"pip3 install vulture\""
-    exit 0
-fi
-
-vulture \
-    --min-confidence 60 \
-    --ignore-names "argtypes,connection_lost,connection_made,converter,data_received,daemon,errcheck,get_ecdh_key,get_privkey,is_compressed,is_fullyvalid,msg_generic,on_*,optionxform,restype,set_privkey,profile_with_perf" \
-    $(git ls-files -- "*.py" ":(exclude)contrib/" ":(exclude)test/functional/data/invalid_txs.py")
+# Myriadcoin: disable lint vulture:
+#if ! command -v vulture > /dev/null; then
+#    echo "Skipping Python dead code linting since vulture is not installed. Install by running \"pip3 install vulture\""
+#    exit 0
+#fi
+#
+#vulture \
+#    --min-confidence 60 \
+#    --ignore-names "argtypes,connection_lost,connection_made,converter,data_received,daemon,errcheck,get_ecdh_key,get_privkey,is_compressed,is_fullyvalid,msg_generic,on_*,optionxform,restype,set_privkey,profile_with_perf" \
+#    $(git ls-files -- "*.py" ":(exclude)contrib/" ":(exclude)test/functional/data/invalid_txs.py")
