@@ -59,8 +59,8 @@ QString BitcoinUnits::shortName(int unit)
 {
     switch(unit)
     {
-    case uBTC: return QString::fromUtf8("bits");
-    case SAT: return QString("sat");
+    case uBTC: return QString::fromUtf8("μXMY");
+    case SAT: return QString("1e-8XMY");
     default: return longName(unit);
     }
 }
