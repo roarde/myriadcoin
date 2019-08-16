@@ -31,6 +31,8 @@
 
 #include <memory>
 #include <stdint.h>
+#include <string>
+#include <utility>
 
 /**
  * Return average network hashes per second based on the last 'lookup' blocks,
