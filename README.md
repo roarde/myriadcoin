@@ -26,7 +26,7 @@ Myriadcoin improvements are documented as MIPs. See [doc/mips.md](doc/mips.md).
 License
 -------
 
-Myriadcoin is a software fork of Bitcoin Core and inherits the terms of the MIT license. See 
+Myriadcoin is a software fork of Bitcoin Core and inherits the terms of the MIT license. See
 [COPYING](COPYING) for more information or see https://opensource.org/licenses/MIT.
 
 Development Process
