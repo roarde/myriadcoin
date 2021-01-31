@@ -206,6 +206,7 @@ public:
         vSeeds.emplace_back("seed7.myriadcoin.org");
         vSeeds.emplace_back("seed8.myriadcoin.org");
         vSeeds.emplace_back("myriadseed1.cryptapus.org"); // cryptapus
+        vSeeds.emplace_back("xmy-seed1.coinid.org"); // COINiD
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,9);
